@@ -1,0 +1,32 @@
+* {
+    font-family: 'Lato', sans-serif;
+    background-color: #1b1b1b;
+}
+#jsLogo {
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 6px;
+}
+/* h1 {
+    text-align: center;
+    font-size: 4em;
+} */
+p {
+    text-align: center;
+    font-size: 25px;
+    margin: 20px;
+    color: white;
+}
+.btn-success {
+    font-size: 20px;
+}
+footer {
+    position: fixed;
+    height: 50x;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}

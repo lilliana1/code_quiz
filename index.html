@@ -28,15 +28,27 @@
         </p>
         
         <!--button to start quiz-->
-        <button type="button" class="btn btn-success">Start Quiz!</button>
+        <button onclick="beginQuiz()" id="start" type="button" class="btn btn-success">Start Quiz!</button>
     
     </div>
     <!-- questions class -->
-    <div class="row justify-content-center" class="question" style="display: none;">
-    
+    <div id="quiz" class="row justify-content-center" class="question" style="display: none;">
+        <div id="question"><p>Question</p></div>
+            <div id="counter">
+
+            </div>
+            <div id="choices">
+                <div id="A" onclick="checkAnswer('A')">A</div>
+                <div id="B" onclick="checkAnswer('B')">B</div>
+                <div id="C" onclick="checkAnswer('C')">C</div>
+                <div id="D" onclick="checkAnswer('D')">D</div>
+            </div>
+        
+        
+        
     </div>
     <!-- results class -->
-    <div class="row justify-content-center" class="results" style="display: none;">
+    <div id="results" class="row justify-content-center" class="results" style="display: none;">
 
     </div>
     

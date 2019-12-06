@@ -115,16 +115,18 @@ body{
     width : 150px;
     height : 10px;
     border-radius: 10px;
-    background-color: lightgray;
+    /* background-color: lightgray; */
     margin-left : 25px;
 }
-#timeGauge{
+/* #timeGauge {
     height : 10px;
     border-radius: 10px;
+   
     background-color: mediumseagreen;
     margin-top : -10px;
     margin-left : 25px;
-}
+} */
+
 /* #progress{
     width : 500px;
     position: absolute;

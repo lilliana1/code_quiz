@@ -62,8 +62,8 @@ let questions = [
     {
         question: "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
         choiceA: "if (i != 5)",
-        choiceB: "if (i <> 5)",
-        choiceC: "if i <> 5",
+        choiceB: "if (i < > 5)",
+        choiceC: "if i < > 5",
         correct: "A"
     }
 ];
@@ -118,6 +118,7 @@ function renderCounter(){
     if(count <= questionTime){
         counter.innerHTML = count;
         timeGauge.style.width = count * gaugeUnit + "px";
+        
         count++
     }else{
         count = 0;

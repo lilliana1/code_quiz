@@ -36,7 +36,7 @@ let questions = [
     },
     //question #2
     {
-        question: "The external JavaScript file must contain the <script> tag.",
+        question: "The external JavaScript file must contain the < script > tag.",
         choiceA: "True",
         choiceB: "False",
         choiceC: "🤔",
@@ -72,8 +72,8 @@ let questions = [
 
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
-let count = 0;
-const questionTime = 10; // 10s
+let count = 75;
+const questionTime = 75; // 10s
 const gaugeWidth = 150; // 150px
 const gaugeUnit = gaugeWidth / questionTime;
 let TIMER;
@@ -103,6 +103,7 @@ function startQuiz(){
     renderProgress();
     renderCounter();
     TIMER = setInterval(renderCounter,1000); // 1000ms = 1s
+   
 }
 
 // render progress
@@ -115,40 +116,60 @@ function renderProgress(){
 // counter render
 
 function renderCounter(){
-    if(count <= questionTime){
-        counter.innerHTML = count;
-        timeGauge.style.width = count * gaugeUnit + "px";
-        
-        count++
-    }else{
-        count = 0;
-        // change progress color to red
-        answerIsWrong();
-        if(runningQuestion < lastQuestion){
-            runningQuestion++;
-            renderQuestion();
-        }else{
-            // end the quiz and show the score
-            clearInterval(TIMER);
-            scoreRender();
-        }
+    count--;
+    counter.innerHTML = count;
+
+    if (count <= 0) {
+        scoreRender()
     }
+    
+    // if(answerIsCorrect){
+    //     console.log("correct");
+        
+        
+    //     timeGauge.style.width = count * gaugeUnit + "px";
+        
+        
+    //     if (count === 0){
+    //         console.log("aja");
+            
+    //     }
+    // }else{
+        
+    //     // change progress color to red
+    //     answerIsWrong();
+    //     if(runningQuestion < lastQuestion){
+    //         runningQuestion++;
+    //         renderQuestion();
+    //     }else{
+    //         // end the quiz and show the score
+    //         clearInterval(TIMER);
+    //         scoreRender();
+    //     }
+    // }
 }
+
+
 
 // checkAnwer
 
 function checkAnswer(answer){
     if( answer == questions[runningQuestion].correct){
         // answer is correct
-        score++;
+        
+        // score++;
+        // alert("CORRECT!🙌");
         // change progress color to green
         // answerIsCorrect();
     }else {
+        count = count - 15;
+        
+        // alert("INCORRECT!🤬");
         // answer is wrong
         // change progress color to red
         // answerIsWrong();
     }
-    count = 0;
+
     if(runningQuestion < lastQuestion){
         runningQuestion++;
         renderQuestion();
@@ -162,6 +183,8 @@ function checkAnswer(answer){
 // answer is correct
 function answerIsCorrect(){
     document.getElementById(runningQuestion);
+    
+    
 }
 
 // answer is Wrong
@@ -169,22 +192,35 @@ function answerIsWrong(){
     document.getElementById(runningQuestion);
 }
 
+
 // score render
 function scoreRender(){
+    count = 0;
+    counter.innerHTML = count;
+
+    var initials = prompt("What are your initials?");
+
+    var highscore = {
+        "highscore": score,
+        "initials": initials
+    }
+    
+    localStorage.setItem("highscore", JSON.stringify(highscore));
+  
     scoreDiv.style.display = "block";
     
     // calculate the amount of question percent answered by the user
     const scorePerCent = Math.round(100 * score/questions.length);
     
-    // choose the image based on the scorePerCent
-    // let img = (scorePerCent >= 80) ? "img/5.png" :
-    //           (scorePerCent >= 60) ? "img/4.png" :
-    //           (scorePerCent >= 40) ? "img/3.png" :
-    //           (scorePerCent >= 20) ? "img/2.png" :
-    //           "img/1.png";
+    //scoreDiv.innerHTML = "<img src="+ img +">";
+    scoreDiv.innerHTML += "<p>"+ scorePerCent +"</p>";
+    scoreDiv.innerHTML += "<p>" + score + "</p>";
+    scoreDiv.innerHTML += "<p>" + initials + "</p>";
+
+
     
-    scoreDiv.innerHTML = "<img src="+ img +">";
-    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+
+
 }
 
 

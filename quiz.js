@@ -6,8 +6,6 @@ const choiceA = document.getElementById("A");
 const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
 const counter = document.getElementById("counter");
-const timeGauge = document.getElementById("timeGauge");
-const progress = document.getElementById("progress");
 const scoreDiv = document.getElementById("scoreContainer");
 
 
@@ -63,13 +61,12 @@ var questions = [
     }
 ];
 
+
 // global variables
 var lastQuestion = questions.length - 1;
 var nextQuestions = 0;
 var count = 76;
 var questionTime = 75;
-// const gaugeWidth = 150;
-// const gaugeUnit = gaugeWidth / questionTime;
 var TIMER;
 var score = 0;
 
@@ -84,27 +81,31 @@ function makeQuestion(){
     
 }
 
+// when user click start, quiz will begin 
 start.addEventListener("click",startQuiz);
 
 // start quiz
 function startQuiz(){
     // hides paragraph of instructions
     instructions.style.display = "none";
+    // hides start button
     start.style.display = "none";
+    // starts making questions
     makeQuestion();
     quiz.style.display = "block";
-    makeCounter();
-    TIMER = setInterval(makeCounter,1000); 
+    // time starts counting 
+    countdown();
+    TIMER = setInterval(countdown,1000); 
    
 }
 
 // counter backwards
-function makeCounter(){
+function countdown(){
     count--;
     counter.innerHTML = count;
     if (count <= 0) {
         scoreMaker()
-    }   
+    } 
 
 }
 
@@ -114,8 +115,7 @@ function checkAnswer(answer){
        
     } else {
         // -15 seconds when answer is incorrect
-        count = count - 10;
-
+        count = count - 15;
     }
 
     if(nextQuestions < lastQuestion) {
@@ -129,11 +129,12 @@ function checkAnswer(answer){
     }
 }
 
-// score make
+// score maker
 function scoreMaker(){
     count = 0;
     counter.innerHTML = count;
 
+    // asks user for initials
     var initials = prompt("What are your initials?");
 
     var highscore = {
@@ -144,13 +145,13 @@ function scoreMaker(){
     // store highscore and initials
     localStorage.setItem("highscore", JSON.stringify(highscore));
     
+    // score table will appear 
     scoreDiv.style.display = "block";
-    
- 
     
     // display score 
     scoreDiv.innerHTML += "<p>" + score + "</p>";
     scoreDiv.innerHTML += "<p>" + initials + "</p>";
+    
 }
 
 

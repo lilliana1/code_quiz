@@ -5,6 +5,24 @@ This Code Quiz will test you on your JS skills but, you must do it fast because 
 
 ## Code 
 
+```js
+// start quiz
+function startQuiz(){
+    // hides paragraph of instructions
+    instructions.style.display = "none";
+    // hides start button
+    start.style.display = "none";
+    // starts to makes the questions
+    makeQuestion();
+    // questions appears 1 by 1 
+    quiz.style.display = "block";
+    // time starts counting
+    makeCounter();
+    TIMER = setInterval(makeCounter,1000); 
+}
+``` 
+![picture](./assets/images/code_quiz_sc.png)
+
 
 ## Technologies
 * HTML

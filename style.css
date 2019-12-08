@@ -63,20 +63,12 @@ p {
     text-align: center;
     cursor: pointer;
     margin-top: 20px;
-    color :white ;    
+    color :white ;   
 }
 
 #start:hover{
-    color:#8a0303 ;
+    color:#8a0303;
 }
-
-/* #qImg{
-    width : 200px;
-    height : 200px;
-    position: absolute;
-    left : 0px;
-    top : 0px;
-}  */
 
 #question{
     width:100%;
@@ -98,6 +90,7 @@ p {
     padding : 5px;
     margin: 10px 0;
     cursor: pointer;
+    
     
 }
 

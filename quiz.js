@@ -12,7 +12,7 @@ const scoreDiv = document.getElementById("scoreContainer");
 
 
 // questions to be asked
-let questions = [
+var questions = [
     //question #1
     {
         question: "Inside which HTML element do we put the JavaScript?",
@@ -64,18 +64,18 @@ let questions = [
 ];
 
 // global variables
-const lastQuestion = questions.length - 1;
-let runningQuestion = 0;
-let count = 76;
-const questionTime = 75;
-const gaugeWidth = 150;
-const gaugeUnit = gaugeWidth / questionTime;
-let TIMER;
-let score = 0;
+var lastQuestion = questions.length - 1;
+var nextQuestions = 0;
+var count = 76;
+var questionTime = 75;
+// const gaugeWidth = 150;
+// const gaugeUnit = gaugeWidth / questionTime;
+var TIMER;
+var score = 0;
 
 // ask a question
-function renderQuestion(){
-    let q = questions[runningQuestion];
+function makeQuestion(){
+    let q = questions[nextQuestions];
     question.innerHTML = "<p>"+ q.question +"</p>";
     // user has 3 choices to pick from
     choiceA.innerHTML = q.choiceA;
@@ -91,72 +91,46 @@ function startQuiz(){
     // hides paragraph of instructions
     instructions.style.display = "none";
     start.style.display = "none";
-    renderQuestion();
+    makeQuestion();
     quiz.style.display = "block";
-    renderProgress();
-    renderCounter();
-    TIMER = setInterval(renderCounter,1000); 
+    makeCounter();
+    TIMER = setInterval(makeCounter,1000); 
    
 }
 
-// render progress
-function renderProgress(){
-    for(let qIndex = 0; qIndex <= lastQuestion; qIndex++){
-        progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
-    }
-}
-
-// counter render
-function renderCounter(){
+// counter backwards
+function makeCounter(){
     count--;
     counter.innerHTML = count;
     if (count <= 0) {
-        scoreRender()
-    }    
+        scoreMaker()
+    }   
+
 }
 
 // checking if answer is correct 
 function checkAnswer(answer){
-    if( answer == questions[runningQuestion].correct){
-        // answer is correct
-        
-        // score++;
-        // alert("CORRECT!🙌");
-        // change progress color to green
-        // answerIsCorrect();
-    }else {
+    if(answer == questions[nextQuestions].correct){
+       
+    } else {
         // -15 seconds when answer is incorrect
-        count = count - 15;
-        // alert("INCORRECT!🤬");
-        // answer is wrong
-        // change progress color to red
-        // answerIsWrong();
+        count = count - 10;
+
     }
 
-    if(runningQuestion < lastQuestion) {
-        runningQuestion++;
-        renderQuestion();
-    } else {
+    if(nextQuestions < lastQuestion) {
+        nextQuestions++;
+        makeQuestion();
+    } 
+    else {
         // end the quiz and show the score
         clearInterval(TIMER);
-        scoreRender();
+        scoreMaker();
     }
 }
 
-// answer is correct lets continue questions
-function answerIsCorrect(){
-    document.getElementById(runningQuestion);
-    
-    
-}
-
-// answer is wrong lets continue questions
-function answerIsWrong(){
-    document.getElementById(runningQuestion);
-}
-
-// score render
-function scoreRender(){
+// score make
+function scoreMaker(){
     count = 0;
     counter.innerHTML = count;
 
@@ -169,21 +143,14 @@ function scoreRender(){
 
     // store highscore and initials
     localStorage.setItem("highscore", JSON.stringify(highscore));
-  
+    
     scoreDiv.style.display = "block";
     
-    // calculate the amount of question percent answered by the user
-    // const scorePerCent = Math.round(100 * score/questions.length);
+ 
     
     // display score 
-    // scoreDiv.innerHTML += "<p>"+ scorePerCent +"</p>";
     scoreDiv.innerHTML += "<p>" + score + "</p>";
     scoreDiv.innerHTML += "<p>" + initials + "</p>";
-
-
-    
-
-
 }
 
 

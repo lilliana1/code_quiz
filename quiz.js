@@ -7,6 +7,7 @@ const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
 const counter = document.getElementById("counter");
 const scoreDiv = document.getElementById("scoreContainer");
+const highscoresBtn = document.getElementById("highscores");
 
 
 // questions to be asked
@@ -65,7 +66,7 @@ var questions = [
 // global variables
 var lastQuestion = questions.length - 1;
 var nextQuestions = 0;
-var count = 75;
+var count = 76;
 var questionTime = 75;
 var TIMER;
 var score = 0;
@@ -96,13 +97,16 @@ function startQuiz(){
     // time starts counting 
     countdown();
     TIMER = setInterval(countdown,1000); 
-   
+    // score 
+    scoreDiv.style.display = "none";
+    // hides highscore button
+    highscoresBtn.style.display = "none";
 }
 
 // counter backwards
 function countdown(){
-    counter.innerHTML = count;
     count--;
+    counter.innerHTML = count;
     if (count <= 0) {
         scoreMaker()
     } 
@@ -140,11 +144,12 @@ function scoreMaker(){
     // asks user for initials
     var initials = prompt("What are your initials?");
     console.log(count)
-
+    var highscoreArray = [];
     var highscore = {
         "highscore": count,
         "initials": initials
     }
+
 
     // store highscore and initials
     localStorage.setItem("highscore", JSON.stringify(highscore));
@@ -155,8 +160,24 @@ function scoreMaker(){
     // display score 
     scoreDiv.innerHTML += "<p>" + count + "</p>";
     scoreDiv.innerHTML += "<p>" + initials + "</p>";
+
+    
     
 }
+//see highscores
+function highscores() {
+    var highscoreDisplay = JSON.parse(localStorage.getItem("highscore"));
+    // console.log(highscoreDisplay)
+    // hihgscore table will appear 
+    scoreDiv.style.display = "block";
+
+
+}
+
+    
+    
+// when user click start, quiz will begin 
+highscoresBtn.addEventListener("click",highscores);
 
 
 

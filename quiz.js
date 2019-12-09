@@ -65,7 +65,7 @@ var questions = [
 // global variables
 var lastQuestion = questions.length - 1;
 var nextQuestions = 0;
-var count = 76;
+var count = 75;
 var questionTime = 75;
 var TIMER;
 var score = 0;
@@ -101,8 +101,8 @@ function startQuiz(){
 
 // counter backwards
 function countdown(){
-    count--;
     counter.innerHTML = count;
+    count--;
     if (count <= 0) {
         scoreMaker()
     } 
@@ -111,34 +111,38 @@ function countdown(){
 
 // checking if answer is correct 
 function checkAnswer(answer){
-    if(answer == questions[nextQuestions].correct){
-       
+
+    if(nextQuestions < lastQuestion) {
+
+    if(answer === questions[nextQuestions].correct){
+        console.log("check", count)
     } else {
         // -15 seconds when answer is incorrect
         count = count - 15;
+        counter.innerHTML = count;
     }
-
-    if(nextQuestions < lastQuestion) {
         nextQuestions++;
         makeQuestion();
     } 
     else {
         // end the quiz and show the score
         clearInterval(TIMER);
+        counter.innerHTML = count;
         scoreMaker();
     }
 }
 
 // score maker
 function scoreMaker(){
-    count = 0;
+    // count = 0;
     counter.innerHTML = count;
-
+    console.log(count)
     // asks user for initials
     var initials = prompt("What are your initials?");
+    console.log(count)
 
     var highscore = {
-        "highscore": score,
+        "highscore": count,
         "initials": initials
     }
 
@@ -149,7 +153,7 @@ function scoreMaker(){
     scoreDiv.style.display = "block";
     
     // display score 
-    scoreDiv.innerHTML += "<p>" + score + "</p>";
+    scoreDiv.innerHTML += "<p>" + count + "</p>";
     scoreDiv.innerHTML += "<p>" + initials + "</p>";
     
 }

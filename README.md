@@ -3,6 +3,8 @@
 ## Introduction
 This Code Quiz will test you on your JS skills but, you must do it fast because time is running. Everytime you get a wrong answer, you will get penalize. Good Luck!
 
+ps. You can see your highscores 🌟
+
 ## Code 
 
 ```js
@@ -23,6 +25,21 @@ function startQuiz(){
 ``` 
 ![picture](./assets/images/code_quiz_sc.png)
 
+``` js
+// using local storage to view history of highscores
+function highscores() {
+    var highscoreDisplay = JSON.parse(localStorage.getItem("highscore"));
+    // console.log(highscoreDisplay)
+    // hihgscore table will appear 
+    scoreDiv.style.display = "block";
+    for (let i = 0; i < highscoreDisplay.length; i++) {
+        var p = document.createElement("p");
+        p.textContent = "Initials: " + highscoreDisplay[i].initials + "  |  Highscore: " + highscoreDisplay[i].highscore
+        scoreDiv.appendChild(p)
+    }
+}
+
+```
 
 ## Technologies
 * HTML

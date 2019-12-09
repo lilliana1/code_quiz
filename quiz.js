@@ -144,22 +144,32 @@ function scoreMaker(){
     // asks user for initials
     var initials = prompt("What are your initials?");
     console.log(count)
-    var highscoreArray = [];
+
+
+    var highscoreArray = JSON.parse(localStorage.getItem("highscore"))
+
+    if ( highscoreArray === null) {
+        highscoreArray = [];
+    }
+
+    console.log(highscoreArray)
+
     var highscore = {
         "highscore": count,
         "initials": initials
     }
 
+    highscoreArray.push(highscore)
 
     // store highscore and initials
-    localStorage.setItem("highscore", JSON.stringify(highscore));
+    localStorage.setItem("highscore", JSON.stringify(highscoreArray));
     
     // score table will appear 
     scoreDiv.style.display = "block";
     
     // display score 
-    scoreDiv.innerHTML += "<p>" + count + "</p>";
-    scoreDiv.innerHTML += "<p>" + initials + "</p>";
+    scoreDiv.innerHTML += "<p> Your new score is: " + count + "</p>";
+    scoreDiv.innerHTML += "<p> Your initials are: " + initials + "</p>";
 
     
     
@@ -168,10 +178,14 @@ function scoreMaker(){
 function highscores() {
     var highscoreDisplay = JSON.parse(localStorage.getItem("highscore"));
     // console.log(highscoreDisplay)
-    // hihgscore table will appear 
+    // highscore table will appear 
     scoreDiv.style.display = "block";
-
-
+    //for loop to read array
+    for (let i = 0; i < highscoreDisplay.length; i++) {
+        var p = document.createElement("p");
+        p.textContent = "Initials:  " + highscoreDisplay[i].initials + "   |  Highscore:  " + highscoreDisplay[i].highscore
+        scoreDiv.appendChild(p);
+    }
 }
 
     

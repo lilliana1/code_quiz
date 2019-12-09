@@ -125,8 +125,6 @@ p {
 #scoreContainer p{
     color: white;
     display: block;
-    width : 59px;
-    height :59px;
     top:130px;
     left:325px;
     font-weight: bold;
